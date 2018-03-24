@@ -12,6 +12,8 @@ class App {
 	private $admin = false;
 
 	function __construct($url) {
+		session_start();
+
 		$url = rtrim($url, "/");
 		$url = explode("/", $url);
 

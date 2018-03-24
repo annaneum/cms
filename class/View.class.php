@@ -53,7 +53,7 @@ class View {
 
         //replace constants
         $const = get_defined_constants();
-        foreach ($lang as $key => $value) {
+        foreach ($const as $key => $value) {
             $tagToReplace = "{" . $key . "}";
             $output = str_replace($tagToReplace, $value, $output);
         }

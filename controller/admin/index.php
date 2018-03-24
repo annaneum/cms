@@ -1,5 +1,5 @@
 <?php
-class Index extends Controller {
+class Index extends Admin {
 	function __construct() {
 		parent::__construct();
 	}

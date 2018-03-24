@@ -5,6 +5,14 @@ class Model extends MysqliDb{
     function __construct() {
         parent::__construct(DB_HOST, DB_USER, DB_PASS, DB);
     }
+
+    public function login() {
+        $_SESSION['user'] = 1;
+    }
+
+    public function logout() {
+        unset($_SESSION['user']);
+    }
 }
 
 ?>

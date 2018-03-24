@@ -20,7 +20,7 @@ define("VIEW_PATH", $view_path);
 $lang_path = DIR_ROOT . "lang/";
 define("LANG_PATH", $lang_path);
 
-$url = "https://" . $_SERVER['HTTP_HOST'] . "/cms/";
+$url = "http://" . $_SERVER['HTTP_HOST'] . "/cms/";
 define("URL", $url);
 
 $link_url = URL;

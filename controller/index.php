@@ -9,8 +9,6 @@ class Index extends Controller {
         $this->View->setTitle("KRK CRM");
         $content = $this->View->fillTemplate("main", array());
         $this->View->setContent($content);
-
-
     }
 }
 
