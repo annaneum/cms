@@ -11,7 +11,7 @@
     </head>
     <body>
     {NAV}
-    <div id="content">
+    <div class="container">
     	{CONTENT}
     </div>
     {JS}
