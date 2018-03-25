@@ -32,7 +32,7 @@ class Language
 	}
 
 	public function getWord($word) {
-		return $this->text[$word];
+		return $this->text["LANG:" . $word];
 	}
 }
 

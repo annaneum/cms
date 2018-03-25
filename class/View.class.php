@@ -16,7 +16,7 @@ class View {
 
     private $Lang;
 
-    private $nav = null;
+    private $nav = array();
     
     function __construct() {
         $this->Lang = new Language("de");
@@ -95,7 +95,7 @@ class View {
     public function render($header = true) {
         $sere_main["TITLE"] = $this->title;
         $sere_main["CSS"] = $this->css;
-        $sere_main["HEADER"] = ($header) ? $this->fillTemplate("header", array("TITLE" => $this->title), $this->templateMain) : "";
+        $sere_main["NAV"] = $this->getNav();
         $sere_main["CONTENT"] = $this->content;
         $sere_main['JS'] = $this->js;
         
@@ -107,11 +107,22 @@ class View {
     }
 
     private function getMenuPoint($text, $link, $active = false) {
-
+        $sere_menu_point['ACTIVE'] = ($active) ? "class='active" : "";
+        $sere_menu_point['LINK'] = $link;
+        $sere_menu_point['TEXT'] = $this->Lang->getWord($text);
+        return $this->fillTemplate("menu_point", $sere_menu_point, $this->templateNav);
     }
 
     private function getNav() {
+        $sere_main = array();
+        $sere_main['MENU_POINTS'] = "";
 
+        $point_count = count($this->nav);
+        for ($i = 0; $i < $point_count; $i++) {
+            $sere_main['MENU_POINTS'] .= $this->getMenuPoint($this->nav[$i]['text'], $this->nav[$i]['link']);
+        }
+        
+        return $this->fillTemplate("main", $sere_main, $this->templateNav);
     }
 }
 

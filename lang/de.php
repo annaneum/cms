@@ -1,1 +1,3 @@
+BRAND = CMS
+
 HOME = Home

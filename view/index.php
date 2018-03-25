@@ -5,14 +5,12 @@
     <head>
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
         <title>{TITLE}</title>
         {CSS}
     </head>
     <body>
-    <div id="header">
-    	{HEADER}
-    </div>
+    {NAV}
     <div id="content">
     	{CONTENT}
     </div>
@@ -26,7 +24,3 @@
 
 [js]
 <script src="{JS_FILE}"></script>
-
-[header]
-<div class="title">{TITLE}</div>
-<a href="{LINK_URL}index">{LANG:HOME}</a>

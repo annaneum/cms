@@ -10,10 +10,13 @@ class Controller {
         $this->User     = $this->getUser();
 
         $this->View->addCSS("bootstrap.min");
-        $this->View->addCSS("https://use.fontawesome.com/releases/v5.0.4/css/all.css", true);
+        //$this->View->addCSS("https://use.fontawesome.com/releases/v5.0.4/css/all.css", true);
 
         $this->View->addJS("jquery-3.3.1.min");
         $this->View->addJS("bootstrap.min");
+
+        //create Navigation
+        $this->View->addMenuPoint("HOME", LINK_URL . "index");
     }
     
     public function __destruct() {
