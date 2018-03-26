@@ -17,6 +17,10 @@ class View {
     private $Lang;
 
     private $nav = array();
+
+    private $nav_right = array();
+
+    private $nav_active = -1;
     
     function __construct() {
         $this->Lang = new Language("de");
@@ -31,7 +35,7 @@ class View {
         }
     }
     
-    public function fillTemplate($area, $values, $template = null) {
+    public function fillTemplate($area, $values = array(), $template = null) {
         $string = file_get_contents(($template == null) ? $this->templateFile : $template);
         
         $string = str_replace(array(
@@ -106,8 +110,22 @@ class View {
         array_push($this->nav, array("text" => $text, "link" => $link));
     }
 
+    public function addRightMenuPoint($text, $link) {
+        array_push($this->nav_right, array("text" => $text, "link" => $link));
+    }
+
+    public function setActiveNav($navText) {
+        $point_count = count($this->nav_right);
+        for ($i = 0; $i < $point_count; $i++) {
+            if ($this->nav[$i]['text'] == $navText) {
+                $this->nav_active = $i;
+                return;
+            }
+        }
+    }
+
     private function getMenuPoint($text, $link, $active = false) {
-        $sere_menu_point['ACTIVE'] = ($active) ? "class='active" : "";
+        $sere_menu_point['ACTIVE'] = ($active) ? " class='active'" : "";
         $sere_menu_point['LINK'] = $link;
         $sere_menu_point['TEXT'] = $this->Lang->getWord($text);
         return $this->fillTemplate("menu_point", $sere_menu_point, $this->templateNav);
@@ -116,10 +134,17 @@ class View {
     private function getNav() {
         $sere_main = array();
         $sere_main['MENU_POINTS'] = "";
+        $sere_main['MENU_RIGHT_POINTS'] = "";
 
         $point_count = count($this->nav);
         for ($i = 0; $i < $point_count; $i++) {
-            $sere_main['MENU_POINTS'] .= $this->getMenuPoint($this->nav[$i]['text'], $this->nav[$i]['link']);
+            $active = $this->nav_active == $i;
+            $sere_main['MENU_POINTS'] .= $this->getMenuPoint($this->nav[$i]['text'], $this->nav[$i]['link'], $active);
+        }
+
+        $point_count = count($this->nav_right);
+        for ($i = 0; $i < $point_count; $i++) {
+            $sere_main['MENU_RIGHT_POINTS'] .= $this->getMenuPoint($this->nav_right[$i]['text'], $this->nav_right[$i]['link']);
         }
         
         return $this->fillTemplate("main", $sere_main, $this->templateNav);

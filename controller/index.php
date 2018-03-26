@@ -1,8 +1,10 @@
 <?php 
 class Index extends Controller {
-    function __construct() {
-        parent::__construct();
-    }
+	function __construct($input) {
+		parent::__construct($input);
+
+		$this->View->setActiveNav("HOME");
+	}
 }
 
 ?>

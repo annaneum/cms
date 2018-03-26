@@ -3,11 +3,21 @@ class Controller {
     protected $Model;
     protected $View;
     protected $User;
+    protected $input;
+    protected $title = "CMS";
+    protected $loggedInRequired = true;
+    protected $logoutLink = true;
     
-    public function __construct() {
+    public function __construct($input) {
         $this->Model    = new Model();
         $this->View     = new View();
         $this->User     = $this->getUser();
+
+        $this->input = $input;
+
+        if($this->loggedInRequired) {
+            $this->checkLogin();
+        }
 
         $this->View->addCSS("bootstrap.min");
         $this->View->addCSS("https://use.fontawesome.com/releases/v5.0.4/css/all.css", true);
@@ -18,6 +28,14 @@ class Controller {
 
         //create Navigation
         $this->View->addMenuPoint("HOME", LINK_URL . "index");
+
+        if ($this->logoutLink) {
+            $this->View->addRightMenuPoint("LOGOUT", LINK_URL . "login/logout");
+        }
+
+        $this->View->setTitle($this->title);
+
+        $this->View->setTemplate(strtolower(get_called_class()));
     }
     
     public function __destruct() {
@@ -38,10 +56,8 @@ class Controller {
         }
     }
 
-    public function index() {
-        $this->View->setTemplate(strtolower(get_called_class()));
-        $this->View->setTitle("KRK CRM");
-        $content = $this->View->fillTemplate("main", array());
+    public function index($sere = array()) {
+        $content = $this->View->fillTemplate("main", $sere);
         $this->View->setContent($content);
     }
 }

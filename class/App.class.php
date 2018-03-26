@@ -47,7 +47,9 @@ class App {
 
 		$this->ctrl = $ctrl;
 
-		$this->Controller = new $ctrl();
+		$input = array_merge($_GET, $_POST, $_SESSION);
+
+		$this->Controller = new $ctrl($input);
 
 		//shorten url
 		do {
