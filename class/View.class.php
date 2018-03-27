@@ -115,7 +115,7 @@ class View {
     }
 
     public function setActiveNav($navText) {
-        $point_count = count($this->nav_right);
+        $point_count = count($this->nav);
         for ($i = 0; $i < $point_count; $i++) {
             if ($this->nav[$i]['text'] == $navText) {
                 $this->nav_active = $i;
@@ -125,7 +125,7 @@ class View {
     }
 
     private function getMenuPoint($text, $link, $active = false) {
-        $sere_menu_point['ACTIVE'] = ($active) ? " class='active'" : "";
+        $sere_menu_point['ACTIVE'] = ($active) ? "active" : "";
         $sere_menu_point['LINK'] = $link;
         $sere_menu_point['TEXT'] = $this->Lang->getWord($text);
         return $this->fillTemplate("menu_point", $sere_menu_point, $this->templateNav);

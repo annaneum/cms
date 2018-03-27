@@ -1,3 +1,8 @@
-body { 
-	padding-top: 70px; 
+
+.main.container {
+	padding-top: 2em;
+}
+
+#accordion .card-header {
+	padding: 0;
 }

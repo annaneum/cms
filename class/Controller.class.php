@@ -24,10 +24,12 @@ class Controller {
         $this->View->addCSS("style");
 
         $this->View->addJS("jquery-3.3.1.min");
+        $this->View->addJS("https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js", true);
         $this->View->addJS("bootstrap.min");
 
         //create Navigation
         $this->View->addMenuPoint("HOME", LINK_URL . "index");
+        $this->View->addMenuPoint("TEST", LINK_URL . "test");
 
         if ($this->logoutLink) {
             $this->View->addRightMenuPoint("LOGOUT", LINK_URL . "login/logout");
